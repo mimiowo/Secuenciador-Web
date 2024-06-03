@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secuenciador de Sintetizador Musical</title>
     <link rel="stylesheet" href="styles/public-style.css">
+    <script type="text/javascript" src="scripts/dynamic-cells.js"></script>
 </head>
 <body>
     <div class="container">
@@ -13,29 +14,33 @@
         </header>
         <main>
             <div class="synth-grid">
-                <div class="grid">
-                    <!-- Example track with varying number of cells -->
-                    <div class="track">
-                        <div class="cell"></div>
-                        <div class="cell"></div>
-                        <div class="cell"></div>
-                        <div class="cell"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cell"></div>
-                        <div class="cell"></div>
-                        <div class="cell"></div>
-                        <div class="cell"></div>
-                    </div>
-                    <!-- Repeat .track div for each track as needed -->
+                <div class="grid" id="gridToAppend">
+                    <!--<div class="track">
+                        <div class="cell"></div> 
+                    </div>-->
                 </div>
             </div>
+
+            <div id="buttons">
+                <button class="control-button" id="play">Play</button>
+                <button class="control-button" id="clear">Clear</button>
+                <button class="control-button" id="bar">Añadir compás</button>
+                <button class="control-button" id="tempo">Añadir tempo</button>
+                <button class="control-button" id="signature">Cambiar ritmo</button>
+            </div>
+
+            <div id="selectors">
+                <select class="control-button" id="select-signature">
+                    <option value="4/4" selected>4/4</option>
+                    <option value="6/8">6/8</option>
+                    <option value="5/4">5/4</option>
+                    <option value="7/4">7/4</option>
+                    <option value="7/8">7/8</option>
+                </select>
+    
+                <input type="number" class="control-button" id="select-tempo" min="1" max="300">
+            </div>
         </main>
-        <footer>
-            <button class="control-button">Play</button>
-            <button class="control-button">Stop</button>
-            <button class="control-button">Clear</button>
-        </footer>
     </div>
 </body>
 </html>
