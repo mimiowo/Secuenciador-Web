@@ -1,5 +1,9 @@
 class Ids {
     static idNumber = 0;
+    static cellIdNumber = 0;
+    static tempo = 0;
+    static timing = 0; //In milliseconds
+    static stop = true;
 }
 
 
@@ -17,6 +21,8 @@ window.onload = function() {
                 for (var i = 0; i < 4; i++) {
                     cell[i] = document.createElement('div');
                     cell[i].setAttribute('class', 'cell');
+                    cell[i].setAttribute('id', 'cell' + Ids.cellIdNumber);
+                    Ids.cellIdNumber += 1;
                 }
             break;
 
@@ -24,6 +30,8 @@ window.onload = function() {
                 for (var i = 0; i < 5; i++) {
                     cell[i] = document.createElement('div');
                     cell[i].setAttribute('class', 'cell');
+                    cell[i].setAttribute('id', 'cell' + Ids.cellIdNumber);
+                    Ids.cellIdNumber += 1;
                 }
             break;
 
@@ -31,6 +39,8 @@ window.onload = function() {
                 for (var i = 0; i < 6; i++) {
                     cell[i] = document.createElement('div');
                     cell[i].setAttribute('class', 'cell');
+                    cell[i].setAttribute('id', 'cell' + Ids.cellIdNumber);
+                    Ids.cellIdNumber += 1;
                 }
             break;
 
@@ -38,6 +48,8 @@ window.onload = function() {
                 for (var i = 0; i < 7; i++) {
                     cell[i] = document.createElement('div');
                     cell[i].setAttribute('class', 'cell');
+                    cell[i].setAttribute('id', 'cell' + Ids.cellIdNumber);
+                    Ids.cellIdNumber += 1;
                 }
             break;
 
@@ -45,6 +57,8 @@ window.onload = function() {
                 for (var i = 0; i < 7; i++) {
                     cell[i] = document.createElement('div');
                     cell[i].setAttribute('class', 'cell');
+                    cell[i].setAttribute('id', 'cell' + Ids.cellIdNumber);
+                    Ids.cellIdNumber += 1;
                 }
             break;
         }
@@ -55,4 +69,57 @@ window.onload = function() {
         }
         Ids.idNumber += 1;
     });
+
+    document.getElementById('clear').addEventListener('click', () => {
+        for (var i = 0; i < Ids.idNumber; i++) {
+            document.getElementById('track' + i).remove();
+        }
+        Ids.idNumber = 0;
+        Ids.cellIdNumber = 0;
+        Ids.stop = true;
+        document.getElementById('play').textContent = "Play";
+    });
+
+    document.getElementById('tempo').addEventListener('click', () => {
+        Ids.tempo = document.querySelector('#select-tempo').value;
+        if (Ids.tempo > 300) {
+            Ids.tempo = 300;
+        } else if (Ids.tempo <= 0) {
+            Ids.tempo = 1;
+        }
+        Ids.timing = 60000 / Ids.tempo;
+    });
+
+    document.getElementById('play').addEventListener('click', () => {
+        if (Ids.stop) {
+            Ids.stop = false;
+            play(0)
+            document.getElementById('play').textContent = "Stop";
+        } else {
+            Ids.stop = true;
+            document.getElementById('play').textContent = "Play";
+        }
+    });
+
+    function play(id) {
+        if (Ids.stop) {
+            return;
+        }
+
+        if (id > 0) {
+            document.getElementById('cell' + (id - 1)).setAttribute('class', 'cell');
+        }
+
+        if (id == 0) {
+            document.getElementById('cell' + (Ids.cellIdNumber - 1)).setAttribute('class', 'cell');
+        }
+
+        document.getElementById('cell' + id).setAttribute('class', 'selectedCell');
+
+        if (id < Ids.cellIdNumber - 1) {
+            setTimeout(play, Ids.timing, (id + 1));
+        } else {
+            setTimeout(play, Ids.timing, 0);
+        }
+    }
 }

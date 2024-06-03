@@ -133,3 +133,13 @@ footer {
     align-items: center;
     justify-content: center;
 }
+
+.selectedCell {
+    display: flex;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    background-color: #777;
+    border-radius: 5px;
+    flex-wrap: wrap;
+}
