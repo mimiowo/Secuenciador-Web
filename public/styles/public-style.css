@@ -143,3 +143,13 @@ footer {
     border-radius: 5px;
     flex-wrap: wrap;
 }
+
+.cellToSound {
+    display: flex;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    background-color: #777;
+    border-radius: 5px;
+    flex-wrap: wrap;
+}

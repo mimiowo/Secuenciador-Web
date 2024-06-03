@@ -23,6 +23,7 @@ window.onload = function() {
                     cell[i].setAttribute('class', 'cell');
                     cell[i].setAttribute('id', 'cell' + Ids.cellIdNumber);
                     Ids.cellIdNumber += 1;
+                    addCellEventListener(cell[i]);
                 }
             break;
 
@@ -101,25 +102,41 @@ window.onload = function() {
         }
     });
 
-    function play(id) {
+    function play(id, protected) {
         if (Ids.stop) {
             return;
         }
 
-        if (id > 0) {
+        if (id > 0 && !protected) {
             document.getElementById('cell' + (id - 1)).setAttribute('class', 'cell');
         }
 
-        if (id == 0) {
+        if (id == 0 && !protected) {
             document.getElementById('cell' + (Ids.cellIdNumber - 1)).setAttribute('class', 'cell');
         }
 
-        document.getElementById('cell' + id).setAttribute('class', 'selectedCell');
+        protected = document.getElementById('cell' + (id)).classList.contains('cellToSound');
+        console.log(protected);
+
+        if (!protected){
+            document.getElementById('cell' + id).setAttribute('class', 'selectedCell');
+        }
 
         if (id < Ids.cellIdNumber - 1) {
-            setTimeout(play, Ids.timing, (id + 1));
+            setTimeout(play, Ids.timing, (id + 1), protected);
         } else {
-            setTimeout(play, Ids.timing, 0);
+            setTimeout(play, Ids.timing, 0, protected);
         }
+    }
+
+    function addCellEventListener(cell) {
+        cell.addEventListener('click', () => {
+            if (!cell.classList.contains('cellToSound')) {
+                cell.setAttribute('class', 'cellToSound');
+            } else {
+                cell.classList.remove('cellToSound');
+                cell.setAttribute('class', 'cell');
+            }
+        });
     }
 }
