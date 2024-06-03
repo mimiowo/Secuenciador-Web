@@ -1,8 +1,8 @@
 class Ids {
     static idNumber = 0;
     static cellIdNumber = 0;
-    static tempo = 0;
-    static timing = 0; //In milliseconds
+    static tempo = 120;
+    static timing = 60000 / 120; //In milliseconds
     static stop = true;
 }
 
