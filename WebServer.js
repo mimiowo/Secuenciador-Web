@@ -8,6 +8,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
+    console.log('Client connected: ' + req.hostname);
 });
 
 app.listen(PORT, () => {
